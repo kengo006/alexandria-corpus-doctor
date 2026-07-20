@@ -1,0 +1,390 @@
+
+===== page 1 =====
+The library is not a w arehouse. A collection of texts becomes a library only
+when the people who keep it can answer for what is inside it, and there is no
+a nswer without e vidence. Every claim about the collection rests on the text
+layer, and the text layer is not the book: it is a copy of a copy, produced by
+software that guesses at spacing, hyphe ns, and page boundaries. When the guess
+is wrong, the political consequences are quiet. Nothing crashes. The search
+simply returns nothing, and the per son searching concludes that the knowledge
+is not there.
+
+This is the failure that matters in the library: not the missing file but the
+unfindable one. A r eader who asks for political theory and receives silence
+will not suspect the text layer. There is no error message for a word that was
+split in half by a kerning table, and there is no warning for a sentence that
+was glued into a single token by a broken extractor. The evidence of damage
+lives in the statistics of the collection itself, and only there.
+
+Consider what the people in charge of a collection can measure. The density of
+common phra ses tells them wheth er the words of the text arrived intact. The
+rate of adjacent fragments that join into a frequent word tells them whether
+the political vocabulary of the collection was split apart. The rate of
+overlong tokens tells them whether whole phrases were glued together. None of
+this requires reading every page; all of it requires b elieving the numbers
+only after the numbers have been checked agai nst the page.
+
+The knowledge in a library is not the sum of its files. It is the degree to
+which the colle ction can be interrogated and answer honestly. A damaged text
+layer answers dishonestly: it says nothi ng is there when the evidence is
+sitting in the shelves. The political cost of that dishonesty falls on
+whoever trusted the search, which is to say on the people least equipped to
+suspect it. The remedy is not better trust but bet ter measurement, and the
+measurement must be designed so that it only fires when the damage is real.
+
+So the library needs a doctor, not a decorator. The work of the doctor is to
+probe what is inside the collection, to measure the text layer against the
+evidence of the page, and to repair only what the statistics of the knowledge
+itself can justify. Everything else is left alone, because in a library the
+first duty of the people to the texts is the same as the first duty of the
+doctor to the patient: do no harm to what is healthy.
+The library is not a warehouse. A collection of texts becomes a l ibrary only
+when the people who keep it can answer for what is ins ide it, and there is no
+answer without evidence. Every claim about the collection rests on the text
+layer, and the text layer is not the book: it is a copy of a copy, produced by
+software that guesses at spacing, hyphens, and page boundaries. When the guess
+is wrong, the political consequences are quiet. Nothing crashes. The search
+simply returns nothing, and the person searching concludes that the knowledge
+is not there.
+
+This is the failure that matters in the library: not the missing file but the
+unfindable one. A reader who asks for political theory and receives silence
+will not suspect the text layer. There is no error message for a word that was
+split in half by a kerning table, and there is no war ning for a sentence that
+was glued into a single token by a broken extractor. The evidence of damage
+lives in the statistics of the coll ection itself, and only there.
+
+Consider what the people in charge of a collection can measure. The density of
+common phrases tells them whether the words of the text arrived intact. The
+rate of adjacent fragments that join into a frequ ent word tells them whether
+the political voc abulary of the c ollection was split apart. The rate of
+overlong tokens tells them whether whole phrases were glued together. None of
+this r equires reading every page; all of it requires believing the numbers
+only after the numbers have been checked against the page.
+
+The knowledge in a library is not the sum of its files. It is the degree to
+which the collection can be interrogated and ans wer honestly. A damaged text
+layer answers dishonestly: it says nothing is there when the evidence is
+sitting in the shelves. The political cost of that dishonesty falls on
+whoever trusted the search, which is to say on the peop le least equipped to
+suspect it. The remedy is not better trust but better measurement, and the
+measurement must be designed so that it only fires when the damage is real.
+
+So the library needs a doctor, not a decorator. The work of the doctor is to
+probe what is inside the collection, to meas ure the text layer aga inst the
+evidence of the page, and to repair only what the statistics of the knowledge
+itself can j ustify. Everything else is left alone, because in a library the
+first duty of the people to the texts is the same as the first duty of the
+doctor to the patient: do no harm to what is healthy.
+
+===== page 2 =====
+The library is not a warehouse. A collection of texts becomes a library only
+when the people who keep it can answer for what is inside it, and there is no
+answer without evidence. Every claim about the collection rests on the text
+layer, and the text layer is not the book: it is a copy of a copy, produced by
+software that guesses at spacing, hyphens, and page boundaries. When the guess
+is wrong, the poli tical consequences are quiet. Nothing crashes. The search
+simply returns nothing, and the person sea rching concludes that the knowledge
+is not there.
+
+This is the failure that matters in the library: not the m issing file but the
+unfindable one. A reader who asks for political theory and receives silence
+will not suspect the text layer. There is no error message for a word that was
+split in half by a kerning table, and there is no warning for a sentence that
+was glued into a single token by a broken extractor. The evidence of damage
+lives in the statistics of the collection itself, and only there.
+
+Consider what the people in charge of a collection can measure. The densi ty of
+common phrases tells them whether the words of the text arrived intact. The
+rate of adjacent fragments that join into a frequent word tells them whether
+the political vocabulary of the collection was split apart. The rate of
+overlong tokens tells them whether whole phrases were glued together. None of
+this requires reading every page; all of it requires believing the numbers
+only after the numbers have been checked against the page.
+
+The knowledge in a library is not the sum of its files. It is the degree to
+which the collection can be interrogated and answer honestly. A damaged text
+layer answers dishonestly: it says nothing is there when the evidence is
+sitting in the shelves. The political cost of that dishonesty falls on
+whoever trusted the search, which is to say on the people least equip ped to
+suspect it. The remedy is not better trust but better measurement, and the
+measurement must be designed so that it only fires when the damage is real.
+
+So the library needs a doc tor, not a decorator. The work of the doctor is to
+probe what is inside the collection, to measure the text layer against the
+evidence of the page, and to repair only what the statistics of the knowledge
+itself can justify. Everything else is left alone, because in a library the
+first duty of the people to the texts is the same as the first duty of the
+doctor to the patient: do no harm to what is healthy.
+The library is not a warehouse. A collection of texts becomes a library only
+when the people who keep it can answer for what is inside it, and there is no
+answer without evidence. Every claim about the collection rests on the text
+layer, and the text layer is not the book: it is a copy of a copy, produced by
+software that guesses at spacing, hyphens, and page boundaries. When the guess
+is wrong, the political consequences are quiet. Nothing crashes. The search
+simp ly returns nothing, and the person searching concludes that the knowledge
+is not there.
+
+This is the fail ure that matters in the library: not the missing file but the
+unfindable one. A reader who asks for political theory and receives silence
+will not suspe ct the text layer. There is no error message for a word that was
+split in half by a kerning table, and there is no warning for a sentence that
+was glued into a single token by a broken extractor. The evidence of damage
+lives in the statistics of the collection itself, and only there.
+
+Consider what the people in charge of a collection can measure. The density of
+common phrases tells them whether the words of the text arrived intact. The
+rate of adjacent fra gments that join into a frequent word tells them whether
+the political vocabulary of the collection was split apart. The rate of
+overlong t okens tells them whether whole phrases were glued together. None of
+this requires reading every page; all of it requires believing the numbers
+only after the numbers have been checked against the page.
+
+The knowledge in a library is not the sum of its files. It is the degr ee to
+which the collection can be interrogated and answer honestly. A damaged text
+layer answers dishonestly: it says nothing is there when the evidence is
+sitting in the shelves. The political cost of that dishonesty falls on
+whoever trusted the search, which is to say on the people least equipped to
+suspect it. The remedy is not better trust but better measurement, and the
+measurement must be designed so that it only fires when the damage is real.
+
+So the library needs a doctor, not a decorator. The work of the doctor is to
+probe what is inside the collection, to measure the text layer against the
+evidence of the page, and to repair only what the statistics of the knowledge
+itself can justify. Everything else is left alone, because in a lib rary the
+first duty of the people to the texts is the same as the first duty of the
+doctor to the patient: do no harm to what is healthy.
+
+===== page 3 =====
+The library is not a warehouse. A collection of texts becomes a library only
+when the people who keep it can answer for what is inside it, and there is no
+answer without evidence. Every claim about the collection rests on the text
+layer, and the text layer is not the book: it is a copy of a copy, p roduced by
+software that guesses at spacing, hyphens, and page boundaries. When the guess
+is wrong, the political consequences are quiet. Nothing crashes. The search
+simply returns nothing, and the person searching concludes that the knowledge
+is not there.
+
+This is the failure that matters in the library: not the missing file but the
+unfindable one. A reader who asks for political theory and receives silence
+will not suspect the text layer. There is no error message for a word that was
+split in half by a kerning table, and there is no w arning for a sentence that
+was glued into a single token by a broken extractor. The evidence of d amage
+lives in the statistics of the collection itself, and only there.
+
+Consider what the people in charge of a colle ction can measure. The d ensity of
+common phrases tells them whether the words of the text arrived intact. The
+rate of adjacent fragments that join into a frequent word tells them whether
+the political vocabulary of the collection was split apart. The rate of
+overlong tokens tells them whether whole phrases were glued together. None of
+this requires reading every page; all of it requires believing the numbers
+only after the numbers have been checked again st the page.
+
+The knowledge in a l ibrary is not the sum of its files. It is the degree to
+which the collection can be interrogated and answer honestly. A damaged text
+layer answers dishonestly: it says nothing is there when the evidence is
+sitting in the shelves. The political cost of that dishonesty falls on
+whoev er trusted the search, which is to say on the people least equipped to
+suspect it. The remedy is not better trust but better measurement, and the
+measurement must be desi gned so that it only fires when the damage is real.
+
+So the l ibrary needs a doctor, not a decorator. The work of the doctor is to
+probe what is insi de the collection, to measure the text layer against the
+evidence of the page, and to repair only what the statistics of the knowledge
+itself can justify. Everything else is left alone, because in a library the
+first duty of the people to the texts is the same as the first duty of the
+doctor to the patient: do no harm to what is healthy.
+The library is not a warehouse. A collection of texts becomes a l ibrary only
+when the people who keep it can answer for what is inside it, and there is no
+answer without evid ence. Every claim about the collection rests on the text
+layer, and the text layer is not the book: it is a copy of a copy, produced by
+software that guesses at spacing, hyphens, and page boundaries. When the guess
+is wrong, the political consequences are quiet. Nothing crashes. The search
+simply returns nothing, and the person searching concludes that the knowledge
+is not there.
+
+This is the failure that matters in the library: not the missing file but the
+unfindable one. A reader who asks for political theory and receives silence
+will not suspect the text layer. There is no error message for a word that was
+split in half by a kerning table, and there is no warning for a sentence that
+was glued into a single token by a broken extractor. The evidence of damage
+lives in the statistics of the collection itself, and only there.
+
+Consider what the people in charge of a collection can measure. The density of
+common phrases tells them whether the words of the text arrived intact. The
+rate of adjacent fragments that join into a frequent word tells them whether
+the political vocabulary of the collection was split apart. The rate of
+overl ong tokens tells them whether whole phrases were glued together. None of
+this requires reading every page; all of it requires believing the numbers
+only after the numbers have been checked against the page.
+
+The knowledge in a library is not the sum of its files. It is the d egree to
+which the collection can be interrogated and answer honestly. A damaged text
+layer answers dishonestly: it says nothing is there when the evidence is
+sitting in the shelves. The political cost of that dishonesty falls on
+whoever trusted the search, which is to say on the people least equipped to
+suspect it. The remedy is not better trust but better measurement, and the
+measurement must be designed so that it only fires when the damage is real.
+
+So the library needs a doctor, not a dec orator. The work of the doctor is to
+probe what is inside the collection, to measure the text layer against the
+evidence of the page, and to repair only what the statistics of the knowledge
+itself can justify. Everything else is left alone, because in a library the
+first duty of the people to the texts is the same as the first duty of the
+doctor to the pati ent: do no harm to what is healthy.
+
+===== page 4 =====
+The library is not a warehouse. A collection of texts becomes a library only
+when the people who keep it can answer for what is inside it, and there is no
+answer without evidence. Every claim about the collection rests on the text
+layer, and the text layer is not the book: it is a copy of a copy, produced by
+software that guesses at spacing, hyphens, and page boundaries. When the guess
+is wrong, the political consequences are quiet. Nothing crashes. The sear ch
+simply returns nothing, and the person searching concludes that the knowledge
+is not there.
+
+This is the failure that matters in the library: not the missing file but the
+unfindable one. A reader who asks for political the ory and receives silence
+will not suspect the text layer. There is no error message for a word that was
+split in half by a kerning table, and there is no warning for a sentence that
+was glued into a single token by a broken extractor. The evidence of damage
+lives in the statistics of the collection itself, and only there.
+
+Consider what the people in charge of a collection can measure. The density of
+common phrases tells them whether the words of the text arrived intact. The
+rate of adjacent fragments that join into a frequent word tells them whet her
+the political vocabulary of the collection was split apart. The rate of
+overlong tokens tells them whether whole phrases were glued together. None of
+this requires reading every page; all of it requires believing the numbers
+only after the numbers have been checked against the page.
+
+The knowledge in a library is not the sum of its files. It is the d egree to
+which the collection can be interrogated and answer honestly. A damaged text
+layer answers dishonestly: it says nothing is there when the evidence is
+sitting in the shelves. The political cost of that dishonesty falls on
+whoever trusted the search, which is to say on the people least equipped to
+suspect it. The remedy is not better trust but better measurement, and the
+measurement must be designed so that it only fires when the damage is real.
+
+So the l ibrary needs a doctor, not a decorator. The work of the doctor is to
+probe what is inside the collection, to measure the text layer against the
+evi dence of the page, and to repair only what the statistics of the knowledge
+itself can justify. Everything else is left alone, because in a library the
+first duty of the people to the texts is the same as the first duty of the
+doctor to the patient: do no harm to what is healthy.
+The library is not a warehouse. A collection of texts becomes a library only
+when the people who keep it can answer for what is inside it, and there is no
+answer w ithout evidence. Every claim about the collection rests on the text
+layer, and the text layer is not the book: it is a copy of a copy, produced by
+soft ware that guesses at spacing, hyphens, and page boundaries. When the guess
+is wrong, the polit ical consequences are quiet. Nothing crashes. The sear ch
+simply returns nothing, and the person searching concludes that the knowledge
+is not there.
+
+This is the failure that matters in the library: not the missing file but the
+unfindable one. A reader who asks for political theory and receives silence
+will not suspect the text layer. There is no error message for a word that was
+split in half by a kerning table, and there is no warning for a sentence that
+was glued into a single token by a broken extractor. The evidence of damage
+lives in the statistics of the collection itself, and only there.
+
+Consider what the people in charge of a collection can measure. The density of
+common phrases tells them whether the words of the text arrived inta ct. The
+rate of adjacent fragments that join into a frequent word tells them whether
+the political vocabulary of the c ollection was split apart. The rate of
+overlong tokens tells them whether whole phrases were glued together. None of
+this requires reading every page; all of it requires believing the numbers
+only after the numbers have been checked against the page.
+
+The knowledge in a library is not the sum of its files. It is the degree to
+which the collection can be interrogated and answer honestly. A d amaged text
+layer answers dishonestly: it says nothing is there when the evidence is
+sitting in the shelves. The pol itical cost of that dishonesty falls on
+whoever trusted the search, which is to say on the people least equipped to
+suspect it. The remedy is not better trust but better measurement, and the
+measurement must be d esigned so that it only fires when the damage is real.
+
+So the library needs a doctor, not a decorator. The work of the doctor is to
+probe what is inside the collection, to measure the text layer against the
+evidence of the page, and to repair only what the statistics of the knowledge
+itself can j ustify. Everything else is left alone, because in a library the
+first duty of the people to the texts is the same as the first duty of the
+doctor to the patient: do no harm to what is healthy.
+
+===== page 5 =====
+The library is not a warehouse. A collection of texts becomes a library only
+when the people who keep it can answer for what is inside it, and there is no
+answer without evidence. Every claim about the collection rests on the text
+layer, and the text layer is not the book: it is a copy of a copy, produced by
+software that guesses at spacing, hyphens, and page boundaries. When the guess
+is wrong, the political consequences are quiet. Nothing crashes. The search
+simply returns nothing, and the person searching concludes that the knowledge
+is not there.
+
+This is the failure that matters in the library: not the missing file but the
+unfindable one. A reader who asks for political theory and receives silence
+will not suspect the text layer. There is no error message for a word that was
+split in half by a kerning table, and there is no warning for a sentence that
+was glued into a single token by a broken extractor. The evidence of damage
+lives in the statistics of the collection itself, and only there.
+
+Consider what the people in charge of a collection can measure. The density of
+common phrases tells them whether the words of the text arrived intact. The
+rate of adjacent fragments that join into a frequent word tells them whet her
+the political vocabulary of the collection was split apart. The rate of
+overlong tokens tells them whether whole phrases were glued together. None of
+this requires reading every page; all of it requires believing the numbers
+only after the numbers have been checked a gainst the page.
+
+The knowledge in a library is not the sum of its files. It is the degree to
+which the collection can be interrogated and answer honestly. A damaged text
+layer answers dishonestly: it says nothing is there when the evidence is
+sitting in the shelves. The political cost of that dishonesty falls on
+whoever t rusted the search, which is to say on the people least equipped to
+suspect it. The remedy is not better trust but better measurement, and the
+measurement must be designed so that it only fires when the damage is real.
+
+So the library needs a doctor, not a decorator. The work of the doctor is to
+probe what is inside the collection, to measure the text layer against the
+evidence of the page, and to repair only what the statistics of the knowledge
+itself can justify. Everything else is left alone, because in a library the
+first duty of the people to the texts is the same as the first duty of the
+doctor to the patient: do no harm to what is healthy.
+The library is not a warehouse. A collection of texts becomes a library only
+when the people who keep it can answer for what is inside it, and there is no
+ans wer without evidence. Every claim about the collection rests on the text
+layer, and the text layer is not the book: it is a copy of a copy, produced by
+software that guesses at spacing, hyphe ns, and page boundaries. When the guess
+is wrong, the political consequences are quiet. Nothing crashes. The search
+simply returns nothing, and the person searching concludes that the knowledge
+is not there.
+
+This is the failure that matters in the library: not the missing file but the
+unfindable one. A reader who asks for political theory and receives silence
+will not suspect the text layer. There is no error message for a word that was
+split in half by a kerning table, and there is no warning for a sentence that
+was glued into a single token by a broken extractor. The evidence of damage
+lives in the statistics of the collection itself, and only there.
+
+Consider what the people in c harge of a collection can measure. The density of
+common phras es tells them whether the words of the text arrived intact. The
+rate of adjacent fragments that join into a frequent word tells them whether
+the political vocabulary of the c ollection was split apart. The rate of
+overlong tokens tells them whether whole phrases were glued together. None of
+this requires reading every page; all of it requires belie ving the numbers
+only after the numbers have been checked against the page.
+
+The kno wledge in a library is not the sum of its files. It is the degree to
+which the colle ction can be interrogated and answer honestly. A damaged text
+layer answe rs dishonestly: it says nothing is there when the evi dence is
+sitting in the shelves. The political cost of that dish onesty falls on
+whoever trusted the search, which is to say on the people least equipped to
+suspect it. The remedy is not better trust but better measurement, and the
+measurement must be designed so that it only fires when the damage is real.
+
+So the library needs a doctor, not a decorator. The work of the doctor is to
+probe what is i nside the collection, to measure the text layer against the
+evidence of the page, and to repair only what the statistics of the knowledge
+itse lf can justify. Everything else is left alone, because in a library the
+first duty of the people to the texts is the same as the first duty of the
+doctor to the patient: do no harm to what is healthy.
