@@ -46,11 +46,20 @@ optional dependency is PyMuPDF for the PDF-side checks.
 | `repair_wordsplits.py` | repair words split apart (`polit ical`, `p eople`) via the morphological-possibility criterion |
 | `unglue_words.py` | split glued spans (`proponentsoftheextendedmind`) via DP segmentation over a clean-file dictionary |
 | `fix_pipeline.py` | escalation ladder: cheap re-extraction + repair first, *measured*; only files that still fail get queued for re-OCR |
+| `tokenwalk.py` | the **single implementation** of adjacent-token joining — and a runnable counter-example (`join_pairs_resub_BROKEN`) showing what `re.sub` does instead |
+| `ligature_and_encoding.py` | ligature expansion, line-end dehyphenation, and font-encoding garble detection — **adapted from four upstream parsers** (docling, Kreuzberg, marker, RAGFlow) with attribution and re-measured thresholds |
 | `add_page_markers.py` | recover printed page anchors from running heads swept into OCR text (LIS outlier removal, four gates, no fuzzy alignment) |
 
 All repair tools are dry-run by default, back up before writing, and follow one
 discipline: **when unsure, do nothing.** A false repair is worse than a missed
 one, and a false page anchor is worse than no anchor.
+
+**The criterion that governs all of them: findability, not correctness.** The
+text layer *locates*; the PDF is the authority. So a defect matters when it
+stops a content word from being found, and not otherwise — page numbers,
+running heads, footnote markers and stop words are **decided not to fix**,
+which is a different state from *not yet fixed*. See LESSONS #13; this is the
+one judgement that changes what the whole ladder is for.
 
 ## Quickstart (2 minutes, synthetic corpus included)
 

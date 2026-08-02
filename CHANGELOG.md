@@ -4,6 +4,35 @@ Versioning note: this project starts at v0.1, matching the convention of its
 sibling repos — early versions that work but have not yet survived outside
 their home corpus.
 
+## v0.2 — 2026-07-31
+
+**Two new tools, seven new lessons, and one judgement that reframes the rest.**
+
+- **New** `tokenwalk.py` — the single implementation of adjacent-token joining,
+  with `join_pairs_resub_BROKEN` kept **executable** beside it. A rule with no
+  runnable counter-example teaches "don't do X" without showing what X does;
+  running the module prints the walk converging and `re.sub` returning the
+  input unchanged.
+- **New** `ligature_and_encoding.py` — ligature expansion, line-end
+  dehyphenation, and font-encoding garble detection, **adapted from four
+  upstream parsers with attribution** (docling MIT, Kreuzberg MIT, marker
+  Apache-2.0, RAGFlow Apache-2.0; licenses verified against each project's
+  LICENSE file). Two deviations are ours and are documented at the functions:
+  the hyphen must be **attached** to the preceding word (upstream's guard reads
+  word tokens, so a line ending in a spaced hyphen joins across and invents a
+  word), and garble detection returns a **rate with its denominator** rather
+  than a boolean. Thresholds were re-measured rather than carried over:
+  upstream flags at 0.5 — 500 permille — while the worst file in this corpus
+  sits at 2.458 permille, two hundred times below it. A boolean at the upstream
+  threshold reports every one of them as clean.
+- **LESSONS #13–#19** — repairing what nobody searches for (the P0/P1/P2
+  criterion); eight domain gaps that are one disease; a repair whose wrong
+  output is a real word; "new" as a judgement relative to a list; mechanism-side
+  versus symptom-side scanning; the self-referential stopping condition; and a
+  test runner that skips but reports passing.
+- **README**: the governing criterion is stated up front — **findability, not
+  correctness**.
+
 ## v0.1 — 2026-07-20
 
 First public release. The toolkit as it emerged from a three-day remediation

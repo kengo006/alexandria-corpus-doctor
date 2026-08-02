@@ -1,13 +1,14 @@
 # LESSONS — the battle log
 
-These tools were not designed; they were *survived into*. Over a three-day
-remediation campaign on a ~530-text corpus, every naive version failed in an
-instructive way. The twelve failures below are preserved in the tools as
-guards and comments; this file is the narrative index. Names of specific
+These tools were not designed; they were *survived into*. Across two
+remediation campaigns on a corpus of a few hundred scholarly texts, every
+naive version failed in an instructive way. The nineteen failures below are
+preserved in the tools as guards, tests and comments; this file is the
+narrative index. Names of specific
 books and files are omitted throughout — the shapes of the failures are what
 generalize.
 
-## The twelve
+## The nineteen
 
 **1. Single-letter rate as the primary damage metric.**
 It flagged interview transcripts and bibliographies (initials like "M.F." and
@@ -98,6 +99,89 @@ worse (glue rate up 20–80×). The queue kept going because nobody had priced
 the ladder. *Fix:* probe files *before* queueing (born-digital → never
 re-OCR), and make the pipeline measure-then-decide per file rather than
 batch-and-hope.
+
+**13. Repairing what nobody would ever search for.**
+A character-substitution class was repaired across 1,122 sites before anyone
+asked whether the word it produced was one a reader would ever search for. It
+was a copula. The text layer is a **locating** layer — the authoritative text
+is the PDF — so the question is not "is this damaged?" but **"does this stop a
+content word from being found?"** *Fix:* three priorities, and the middle one
+does the work. **P0** a content keyword is broken and the file carries no
+correct form → repair. **P1** a content word that is not on your keyword list
+→ two independent pieces of evidence before touching it. **P2** stop words,
+page numbers, running heads, footnote markers, column gutters → **decided not
+to fix, which is not the same as not yet fixed**. The tool was fine; the value
+function was wrong.
+
+**14. Eight domain gaps, one disease.**
+Every scanning expression has a boundary condition, and every boundary
+condition is a region the scan cannot see. Over one campaign the same error
+surfaced eight times in eight different places: a **minimum length** on the
+leading fragment; a **gap width** fixed at exactly one space; a **direction**
+(only splits, never joins); a **case** anchor; a **hyphen-handling** choice
+(tried keeping it, never tried dropping it); a **semantic misjudgement inside
+a guard** (a year read as a fragment, so the detector went blind precisely
+inside bibliographies); a **comparison scope** (corpus-wide dictionary, never
+within a single file); and a **unit of measurement in the gate itself**
+(corpus-wide document frequency, so a term specific to one book could never
+serve as its own reference form). *Fix:* before writing or changing any scan,
+**ask what it structurally cannot see and measure the answer** — write a
+diagnostic that matches only the anchor with no context constraints and diff
+the two. Put the number in the docstring, and say whether the remainder is
+*decided not to fix* or *not yet fixed*.
+
+**15. A repair whose wrong output is a real word.**
+The safest-looking case is the dangerous one. A split fragment joined into a
+perfectly ordinary English word and the gate accepted it on exactly that
+ground — while the printed page carried a **surname with a dropped ligature**.
+Applying the rule in bulk would have replaced a person's name with a word that
+reads as completely normal, and **no downstream gate would ever light up
+again**. Same class: two fragments that are each a real word in another
+language; a fragment that is genuinely the tail of a legitimate phrase.
+*Fix:* pair the pre-flight question of law #2 with its twin — **what does this
+look like when it is wrong?** If the wrong output is a real word, the repair
+never runs in bulk: deny list with dated evidence per entry, a `--show` mode
+that prints surrounding context, and regression cases drawn from the false
+positives you actually met.
+
+**16. "New" is a judgement relative to a list.**
+A defect type was named, ruled low-priority, never written down — and then
+surfaced in four later variants, every one of them during the rounds where
+convergence was being declared. If the list is incomplete, "N consecutive
+rounds with nothing new" measures **the maintainer's memory**, not the corpus.
+*Fix:* register a type the round you name it, **even when the ruling is "not
+fixing this"** — those need the register most, because no tool will ever touch
+them again and the list is the only place they live.
+
+**17. Two kinds of scan find different things.**
+Mechanism-side scanning asks *where is it broken*, and every gate encodes an
+already-named failure mode — so it structurally cannot find one nobody has
+thought of yet. Symptom-side scanning asks a different question: **is this
+book's core term spelled the minority way?** It needs no mechanism, and on its
+first run it found a class that twenty-eight rounds of mechanism-side scanning
+had missed. It is not a replacement: it only sees terms a book discusses
+often, and most of its candidates are legitimate orthography that varies by
+book — a hyphenation the author chose, a period spelling, a translator's
+convention. *Fix:* run both, and let a person read the candidates.
+
+**18. The stopping condition is self-referential.**
+Two conditions, not one: the mechanical indicator at zero **and** N
+consecutive blind-sample rounds turning up nothing new. Only the first is
+machine-checkable. But both are measured *inside* the detector — the
+"nothing new" judgement compares against your own list of known types — so
+whoever declares convergence is the person who has been looking, and their
+detector and their attention are the same set. *Fix:* **the final confirming
+round is ordered by whoever receives the report, not by whoever wrote it.**
+Here a completion was announced twice and overturned twice, both times by an
+instruction to run one more round, and both extra rounds found real defects.
+And note what did *not* help: both reports had said "this is a heuristic, not
+a proof". **A hedge protects the record, not the judgement.**
+
+**19. A test runner that skips is not a test runner that passes.**
+A regression case was skipped for a missing optional dependency, and the
+runner still printed "all tests passed". *Fix:* **exit non-zero when anything
+was skipped**, and inject a stub so environment gaps cannot silence a case.
+Untested is not passed.
 
 ## The three laws they add up to
 
