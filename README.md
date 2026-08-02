@@ -47,7 +47,7 @@ optional dependency is PyMuPDF for the PDF-side checks.
 | `unglue_words.py` | split glued spans (`proponentsoftheextendedmind`) via DP segmentation over a clean-file dictionary |
 | `fix_pipeline.py` | escalation ladder: cheap re-extraction + repair first, *measured*; only files that still fail get queued for re-OCR |
 | `tokenwalk.py` | the **single implementation** of adjacent-token joining — and a runnable counter-example (`join_pairs_resub_BROKEN`) showing what `re.sub` does instead |
-| `ligature_and_encoding.py` | ligature expansion, line-end dehyphenation, and font-encoding garble detection — **adapted from four upstream parsers** (docling, Kreuzberg, marker, RAGFlow) with attribution and re-measured thresholds |
+| `ligature_and_encoding.py` | ligature expansion, line-end dehyphenation, and font-encoding garble detection — **adapted from four upstream parsers** (docling, Kreuzberg, marker, RAGFlow) with attribution and re-measured thresholds — see [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) |
 | `add_page_markers.py` | recover printed page anchors from running heads swept into OCR text (LIS outlier removal, four gates, no fuzzy alignment) |
 
 All repair tools are dry-run by default, back up before writing, and follow one
