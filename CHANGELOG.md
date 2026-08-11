@@ -4,6 +4,16 @@ Versioning note: this project starts at v0.1, matching the convention of its
 sibling repos — early versions that work but have not yet survived outside
 their home corpus.
 
+## v0.3.1 — 2026-08-11
+
+- README said LESSONS documents "the **twelve** mistakes"; it documents twenty.
+  ⚠ The count had drifted *before* today's nineteen→twenty bump, so the tree-wide
+  sweep for the old value (`nineteen`) could not see it — a site that drifted
+  earlier carries a different number and is invisible to a sweep for the one you
+  are replacing. Nor does grouping by noun help here: the README counts
+  "mistakes" and LESSONS counts "failures". Reading both files is what found it.
+- README now points at this changelog.
+
 ## v0.3 — 2026-08-11
 
 **One lesson, and it is the one that tells the segmenter when to stop guessing.**

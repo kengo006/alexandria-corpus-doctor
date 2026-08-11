@@ -121,7 +121,7 @@ median-relative and adapts to your corpus automatically.
 
 ## The battle log
 
-[LESSONS.md](LESSONS.md) documents the twelve mistakes that shaped these
+[LESSONS.md](LESSONS.md) documents the twenty mistakes that shaped these
 tools — circular dictionary contamination (the defect writes itself into the
 lexicon used to detect it), the `re.sub` adjacent-pair bug, why "must halve
 the metric" is mathematically impossible for mid-band files, and the general
@@ -140,3 +140,6 @@ laws they add up to. If you build corpus tooling of your own, start there.
 ## License
 
 MIT
+
+Release history, and the reasoning behind each change, is in
+[CHANGELOG.md](CHANGELOG.md).
