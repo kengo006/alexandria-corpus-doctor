@@ -238,7 +238,7 @@ def main():
                 ok, has_hyphen = classify_sep(sep)
                 if not ok:
                     i += 1; continue
-                # Apostrophe guard: the s of `Foucault's own` must not merge forward.
+                # Apostrophe guard: the s of `the author's own` must not merge forward.
                 if m1.start() > 0 and text[m1.start() - 1] in "'’":
                     i += 1; continue
                 a, b = m1.group(0), m2.group(0)

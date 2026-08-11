@@ -75,7 +75,7 @@ identical to ASCII `-`, 1,086 times. *Fix:* normalize all hyphen and
 whitespace variants first, *then* classify.
 
 **9. Three near-misses caught in dry-run.**
-The possessive `'s` merging forward (`Foucault's own` → "sown"); name
+The possessive `'s` merging forward (`the author's own` → "sown"); name
 initials merging (`Robert E` → "roberte"); and a DP segmenter scoring with
 *positive* log-frequencies — the more pieces you cut, the higher the score,
 so it shredded real words. *Fix:* apostrophe guard, initial guards, log
