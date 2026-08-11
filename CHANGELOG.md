@@ -4,6 +4,30 @@ Versioning note: this project starts at v0.1, matching the convention of its
 sibling repos — early versions that work but have not yet survived outside
 their home corpus.
 
+## v0.3 — 2026-08-11
+
+**One lesson, and it is the one that tells the segmenter when to stop guessing.**
+
+- **New lesson 20 — glued words with a knowable cause.** `unglue_words.py`
+  segments a fused token by dictionary probability because the space is normally
+  just gone, and nothing in the file records where it stood. One subclass is not
+  like that: some layout-aware extractors normalise em and en dashes to ASCII
+  hyphens and then drop them at an internal cell boundary, welding the two sides
+  into one token. Measured on one 18-page article — 29 em dashes and 58 en
+  dashes in a plain text-flow extraction, **zero of either** in the layout-aware
+  one, and 6 fused pairs as a result. The true value is still in the PDF, so
+  these can be repaired **against the source** rather than inferred; and
+  dictionary segmentation is exactly the method whose wrong answers arrive as
+  real words (lesson 15). `unglue_words.py` now carries the pointer in its own
+  docstring, beside the discipline it qualifies.
+- ⚠ **Scope, stated plainly:** the cause is documented, the source-diff repair is
+  **not implemented here**. What ships is the lesson and the boundary — which
+  fused spans a dictionary should never be the first answer for.
+- LESSONS heading and its opening line both move from nineteen to twenty. *(The
+  count lives in two places in this file; changing one and not the other is the
+  failure this project's own release checklist exists to catch.)*
+- 20 lessons, 18 files.
+
 ## v0.2 — 2026-07-31
 
 **Two new tools, seven new lessons, and one judgement that reframes the rest.**

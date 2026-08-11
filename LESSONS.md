@@ -2,13 +2,13 @@
 
 These tools were not designed; they were *survived into*. Across two
 remediation campaigns on a corpus of a few hundred scholarly texts, every
-naive version failed in an instructive way. The nineteen failures below are
+naive version failed in an instructive way. The twenty failures below are
 preserved in the tools as guards, tests and comments; this file is the
 narrative index. Names of specific
 books and files are omitted throughout — the shapes of the failures are what
 generalize.
 
-## The nineteen
+## The twenty
 
 **1. Single-letter rate as the primary damage metric.**
 It flagged interview transcripts and bibliographies (initials like "M.F." and
@@ -182,6 +182,24 @@ A regression case was skipped for a missing optional dependency, and the
 runner still printed "all tests passed". *Fix:* **exit non-zero when anything
 was skipped**, and inject a stub so environment gaps cannot silence a case.
 Untested is not passed.
+
+**20. Some glued words have a knowable cause — and then the repair stops guessing.**
+`unglue_words.py` segments a fused token by dictionary probability, because the
+space is normally just *gone* and nothing left in the file says where it stood.
+One subclass is not like that. Some layout-aware extractors normalise every em
+and en dash to an ASCII hyphen and, at an internal cell boundary, drop it and
+weld the two sides together. Where the dash had spaces around it the loss is
+cosmetic; where it did not (`assembly—it`), two words become one token and the
+shorter one stops being findable. Measured on one 18-page article: 29 em dashes
+and 58 en dashes present in a plain text-flow extraction, **zero of either** in
+the layout-aware one, and 6 fused pairs as a result. *Why it matters:* the true
+value is still in the PDF, so this subclass can be repaired **against the
+source** instead of inferred from a dictionary — and dictionary segmentation is
+precisely the method whose wrong answers come out as real words (lesson 15).
+*Fix:* before segmenting, compare the fused span against a dash-preserving
+extraction of the same page; where the source has a dash and the fused form
+occurs exactly once, the repair is determined rather than guessed. ⚠ Only the
+determined ones. The rest stay with the dictionary path and its deny list.
 
 ## The three laws they add up to
 

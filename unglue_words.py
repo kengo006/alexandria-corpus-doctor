@@ -18,6 +18,13 @@ keeps legitimate long words like `psychopharmaceuticals` safe.
 Discipline: after splitting, verify (1) long-token count fell, (2) word count
 rose by a plausible amount, (3) READ a few repaired spans. When unsure, do nothing.
 
+Known subclass this method should NOT be the first answer for (LESSONS #20):
+some layout-aware extractors normalise em/en dashes to ASCII hyphens and then
+drop them at a cell boundary, welding `assembly-it` into `assemblyit`. There the
+true value is still in the PDF, so a diff against a dash-preserving extraction
+of the same page settles it exactly -- determined, not inferred. Reach for the
+dictionary only for the fused spans that source comparison cannot decide.
+
 Usage:
   python unglue_words.py --corpus <txt-root> [--apply] [--preview <dir>]
                          [--exclude <prefix,prefix,...>] [--backup <dir>]
