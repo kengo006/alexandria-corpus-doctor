@@ -14,6 +14,11 @@ their home corpus.
   "mistakes" and LESSONS counts "failures". Reading both files is what found it.
 - README now points at this changelog.
 
+**No release tag for this patch.** It carries documentation fixes only and ships
+no behaviour change, so the last tagged release remains v0.3. Recorded here so
+that the gap between this file and the tag list reads as a decision rather than
+an omission.
+
 ## v0.3 — 2026-08-11
 
 **One lesson, and it is the one that tells the segmenter when to stop guessing.**
