@@ -33,6 +33,8 @@ run once, read your distribution, then decide what to trust.
 Usage:
   python corpus_health.py --corpus <txt-root> [--pdf <pdf-root>] [--no-pdf]
   (--pdf enables gate 3; requires PyMuPDF: uv run --with pymupdf ...)
+Exit code 0 = every gate that ran found nothing; 1 = findings, or a gate you
+asked for (--pdf without PyMuPDF) could not run.
 
 CORPUS_ROOT env var is honored when --corpus is omitted.
 Files and directories whose names start with "_" are ignored (workspace convention).
@@ -118,11 +120,15 @@ def scan_txt(root, freq=None):
 
 
 def scan_pdf(pdf_root):
+    """None when PyMuPDF is missing: the caller must report gate 3 as NOT RUN,
+    never as OK (an empty scan and an impossible scan are different results)."""
     try:
-        import fitz
+        import pymupdf as fitz          # the module's current name
     except ImportError:
-        print("  (PyMuPDF not installed - skipping gate 3)")
-        return []
+        try:
+            import fitz                 # PyMuPDF before the rename
+        except ImportError:
+            return None
     out = []
     for dp, dns, fns in os.walk(pdf_root):
         dns[:] = [d for d in dns if not d.startswith("_")]
@@ -213,7 +219,7 @@ def main():
         print(f"   RED {r['sp']:6.2f} permille  {r['f']}")
     if len(spbad) > 15:
         print(f"   ... {len(spbad)} files total")
-    print(f"   {'OK: no fragmentation above floor' if not spbad else f'FAIL: {len(spbad)} files >= 5 permille (words split apart - grep and embeddings both degraded; run fix_pipeline.py)'}")
+    print(f"   {'OK: no fragmentation above floor' if not spbad else f'FAIL: {len(spbad)} files >= 5 permille (words split apart - grep and embeddings both degraded; run repair_wordsplits.py, or fix_pipeline.py --pdf if you have the source PDFs)'}")
     fails += len(spbad)
 
     print("\nGate 6: glue rate (tokens >= 18 letters per 1k; healthy baseline median 0.20 permille)")
@@ -224,9 +230,14 @@ def main():
     print(f"   {'OK: no glued files' if not gluebad else f'FAIL: {len(gluebad)} files >= 3 permille (sentences glued into single tokens - invisible to gate 5; run unglue_words.py)'}")
     fails += len(gluebad)
 
+    skipped, pdfs = [], None
     if args.pdf and not args.no_pdf:
         print("\nGate 3: hidden OCR layers in PDFs")
         pdfs = scan_pdf(args.pdf)
+        if pdfs is None:
+            print("   NOT RUN: PyMuPDF is not installed (pip install pymupdf), so gate 3 checked nothing")
+            skipped.append("gate 3")
+    if pdfs is not None:
         # Cross-check: a dual-layer PDF is NOT a problem if its text layer was
         # already extracted properly. Without this, the gate keeps flagging
         # handled files forever - and a gate that cries wolf gets ignored.
@@ -251,9 +262,14 @@ def main():
         fails += len(dual)
 
     print("\n" + "=" * 78)
-    print(f"  result: {'ALL GREEN' if fails == 0 else f'{fails} finding(s) to handle'}")
+    if skipped and fails == 0:
+        # never print the words "ALL GREEN" here: a log check like `grep "ALL GREEN"` would pass on "not ALL GREEN"
+        print(f"  result: INCOMPLETE - {', '.join(skipped)} did not run (no findings in the gates that did)")
+    else:
+        print(f"  result: {'ALL GREEN' if fails == 0 else f'{fails} finding(s) to handle'}"
+              + (f" ({', '.join(skipped)} did not run)" if skipped else ""))
     print("=" * 78)
-    return 1 if fails else 0
+    return 1 if (fails or skipped) else 0
 
 
 if __name__ == "__main__":

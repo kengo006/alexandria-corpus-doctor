@@ -26,6 +26,8 @@ Usage:
 
 The corpus and PDF trees must mirror each other: <corpus>/x/y.txt <-> <pdf>/x/y.pdf.
 CORPUS_ROOT env var is honored when --corpus is omitted.
+Needs PyMuPDF (the uv command above installs it on the fly); without it the run
+stops with exit code 2 before touching anything.
 
 Ported from the production tooling of the alexandria librarian role
 (https://github.com/kengo006/alexandria). Battle log: LESSONS.md.
@@ -35,9 +37,27 @@ import json
 import os
 import re
 import shutil
+import sys
 from collections import Counter
 
-import fitz
+
+def _fitz():
+    """Import PyMuPDF only when it is needed, so that `--help` works without it
+    and a missing install stops the run before the slow lexicon build."""
+    try:
+        import pymupdf as fitz          # the module's current name
+    except ImportError:
+        try:
+            import fitz                 # PyMuPDF before the rename
+        except ImportError:
+            sys.stderr.write("fix_pipeline.py needs PyMuPDF to re-extract PDFs. Install it with\n"
+                             "    pip install pymupdf\n"
+                             "or run it without installing:\n"
+                             "    uv run --with pymupdf python fix_pipeline.py --corpus <txt-root> --pdf <pdf-root>\n"
+                             "(Text-only repair of split words needs no PDFs: repair_wordsplits.py.)\n")
+            sys.exit(2)
+    return fitz
+
 
 THR = 5.0        # absolute floor, calibrated on one ~530-text corpus
                  # (median 0.20 permille, P95 2.91) - read your own distribution first
@@ -125,6 +145,7 @@ def main():
     args = ap.parse_args()
     if not args.corpus or not os.path.isdir(args.corpus):
         ap.error("--corpus <dir> is required (or set CORPUS_ROOT)")
+    fitz = _fitz()          # checked here: before the slow lexicon build, not mid-run
 
     print("building corpus lexicon...", flush=True)
     freq = Counter()

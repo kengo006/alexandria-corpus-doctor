@@ -15,7 +15,8 @@ Six verdicts:
   5. pure image             — no usable text layer at all
   6. healthy born-digital   — extract normally
 
-Exit code 0 = healthy (verdict 6); 1 = at-risk (verdicts 1-5); 2 = usage.
+Exit code 0 = healthy (verdict 6); 1 = at-risk (verdicts 1-5); 2 = usage, or
+PyMuPDF not installed (a missing dependency must never read as a verdict).
 
 Usage:
   uv run --with pymupdf python pdf_risk_probe.py "<path-to-pdf>"
@@ -27,7 +28,23 @@ import re
 import sys
 from collections import Counter
 
-import fitz
+
+def _fitz():
+    """Import PyMuPDF only when a PDF is actually opened, so that `--help` and
+    this message work without it installed."""
+    try:
+        import pymupdf as fitz          # the module's current name
+    except ImportError:
+        try:
+            import fitz                 # PyMuPDF before the rename
+        except ImportError:
+            sys.stderr.write("pdf_risk_probe.py needs PyMuPDF to read PDFs. Install it with\n"
+                             "    pip install pymupdf\n"
+                             "or run it without installing:\n"
+                             "    uv run --with pymupdf python pdf_risk_probe.py \"<path-to-pdf>\"\n")
+            sys.exit(2)
+    return fitz
+
 
 # Function-word tables for a cheap language guess (affects only which
 # fragmentation threshold is *reported* — not any repair decision).
@@ -39,7 +56,7 @@ OCR_FLAGS = ("clearscan", "paper capture", "abbyy", "finereader", "tesseract", "
 
 
 def probe(path):
-    doc = fitz.open(path)
+    doc = _fitz().open(path)
     md = doc.metadata or {}
     prod = ((md.get("producer") or "") + " | " + (md.get("creator") or "")).strip(" |")
     n = doc.page_count
@@ -121,7 +138,7 @@ def probe(path):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
+    if len(sys.argv) < 2 or sys.argv[1] in ("-h", "--help"):
         print(__doc__)
-        sys.exit(2)
+        sys.exit(0 if len(sys.argv) >= 2 else 2)
     sys.exit(probe(sys.argv[1]))

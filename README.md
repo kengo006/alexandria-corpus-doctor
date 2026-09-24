@@ -34,7 +34,10 @@ frequencies to fix the library's own files.** The core criterion is
 two-word sequence. That is what lets it repair `la rge` and `p eople`, the
 cases where the prefix is itself a common word and every ratio-based rule
 fails. No models, no training, no API calls; plain Python, and the only
-optional dependency is PyMuPDF for the PDF-side checks.
+optional dependency is PyMuPDF, used only by `pdf_risk_probe.py`,
+`fix_pipeline.py` and the `--pdf` gate of `corpus_health.py` (`pip install
+pymupdf`, or prefix the command with `uv run --with pymupdf`). Nothing in the
+Quickstart needs it.
 
 ## The tools
 
@@ -86,6 +89,11 @@ The demo corpus is synthetic (an original passage with damage injected by
 `examples/make_synthetic.py`, deterministic seed). Note that the repair tools
 will *warn you* on it: a three-file dictionary is a toy. Diagnosis is valid
 anywhere; the repair criterion earns its statistical footing on a real corpus.
+
+Step 3 rewrites the two damaged demo files in place and leaves a `_backup/`
+folder where you ran it. To run the Quickstart again, restore the damaged files
+with `python examples/make_synthetic.py` (fixed seed, byte-identical output);
+`_backup/` can be deleted.
 
 ## Your own corpus
 

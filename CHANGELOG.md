@@ -4,6 +4,37 @@ Versioning note: this project starts at v0.1, matching the convention of its
 sibling repos — early versions that work but have not yet survived outside
 their home corpus.
 
+## v0.3.2 — 2026-09-24
+
+A clean-environment run of the README (fresh clone, empty virtualenv, Python
+3.11 and 3.14, CRLF and LF checkouts) reproduced every number in the
+Quickstart, and found three things that did not hold; fixing them found a fourth.
+
+- `pdf_risk_probe.py` and `fix_pipeline.py` imported PyMuPDF at the top, so
+  without it even `--help` died with `ModuleNotFoundError`. Both now import it
+  only when a PDF is actually opened; without it they stop with an install hint
+  and exit code 2. For `pdf_risk_probe.py` this is more than politeness: its
+  exit code 1 means "at-risk PDF", and a missing dependency must never read as
+  a verdict. `pdf_risk_probe.py --help` now prints the usage instead of trying
+  to open a file called `--help`.
+- `corpus_health.py` gate 5 told every run to use `fix_pipeline.py`, including
+  `--no-pdf` runs that have no PDFs to re-extract. It now names
+  `repair_wordsplits.py` first (the repair the Quickstart uses), and
+  `fix_pipeline.py --pdf` for those who have the source PDFs.
+- `corpus_health.py --pdf` without PyMuPDF printed a note, then reported gate 3
+  as `OK` and the whole run as `ALL GREEN` with exit code 0: a gate you asked
+  for had checked nothing and still passed. It now reports gate 3 as `NOT RUN`,
+  the result reads `INCOMPLETE` (never containing the words `ALL GREEN`, so a
+  log check for them cannot pass by accident), and the exit code is 1. An empty
+  scan and an impossible scan are different results.
+- All three tools now import PyMuPDF under its current name, `pymupdf`, and fall
+  back to `fitz` only on older releases (PyMuPDF 1.28 warns that `fitz` will be
+  removed).
+- The README now says which tools need PyMuPDF and how to install it, and how
+  to restore the demo corpus after step 3.
+
+This patch changes behaviour, so unlike v0.3.1 it gets a release tag.
+
 ## v0.3.1 — 2026-08-11
 
 - README said LESSONS documents "the **twelve** mistakes"; it documents twenty.
