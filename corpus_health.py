@@ -24,7 +24,9 @@ Gates:
                         (`polit ical`); the direct measure of fragmentation.
   6. glue rate        — tokens >= 18 letters (`Researchisneededto`); the blind
                         spot of gate 5 — when a whole phrase is one token there
-                        are no adjacent pairs left to join.
+                        are no adjacent pairs left to join. Long words you have
+                        read and judged real go in GLUE_REAL_WORDS: excluded
+                        from the rate, and counted in the output.
 
 Thresholds are calibrated on one ~530-text Western-language humanities corpus.
 Gate 1 adapts to your corpus (median-relative); gates 5-6 use absolute floors —
@@ -53,6 +55,16 @@ ACCENT = [("Collège", "Collége"), ("Bibliothèque", "Bibliothéque"), ("être"
           ("rêve", "réve"), ("après", "aprés"), ("tekhnē", "tekhné"), ("askēsis", "askésis")]
 CJK = re.compile(r"[一-鿿]")
 PAGEMARK = re.compile(r"={3,}\s*(?:page|omnibus\s*p\.?)\s*\d+", re.I)
+# Gate 6 exemptions: long tokens you have READ and judged to be real words, word -> reason.
+# A field's core terms can be long, and a book that uses one thirty times sits above the
+# glue floor for ever. Judging that a false alarm is not enough: unless the judgement is
+# recorded here, the light stays red, and a light that is always red teaches everyone to
+# ignore it. Register the WORD, never the file: exempting a file would also hide the day
+# it really does glue, while every other long token in it keeps counting. Each entry
+# carries its reason, and the excluded tokens are counted and printed (LESSONS #21).
+GLUE_REAL_WORDS = {
+    # "transindividuation": "a philosophical term; read in context, not two words glued",
+}
 
 
 def walk_txt(root):
@@ -84,7 +96,9 @@ def scan_txt(root, freq=None):
         # Gate 6, glue rate: gate 5's blind spot — a fully glued sentence has no
         # adjacent word pair to join, so its splitpair figure looks PERFECT.
         # 12 OCR-disaster files once sailed through three metrics this way.
-        glue = (sum(1 for w in toks if len(w) >= 18) / len(toks) * 1000) if len(toks) >= 300 else None
+        longs = [w for w in toks if len(w) >= 18]
+        glue_x = sum(1 for w in longs if w.lower() in GLUE_REAL_WORDS)
+        glue = ((len(longs) - glue_x) / len(toks) * 1000) if len(toks) >= 300 else None
         sp = None
         if freq is not None and len(toks) >= 1500:
             # v2 fix (bought with 56 false positives): joined word must be >= 5
@@ -106,7 +120,7 @@ def scan_txt(root, freq=None):
         good = sum(s.count(g) for g, _ in ACCENT)
         bad = sum(s.count(b) for _, b in ACCENT)
         rows.append({
-            "f": rel, "chars": len(s), "words": words, "cjk": cjk, "sp": sp, "glue": glue,
+            "f": rel, "chars": len(s), "words": words, "cjk": cjk, "sp": sp, "glue": glue, "glue_x": glue_x,
             # Language call is RATIO-based. A keyword test once exempted a whole
             # damaged file because it contained one "Politikwissenschaft".
             "de": (sum(1 for w in toks if w.lower() in {"der", "die", "das", "und", "nicht", "von", "dem", "den", "ist"})
@@ -226,7 +240,11 @@ def main():
     gluebad = [r for r in rows if r["glue"] is not None and r["glue"] >= 3.0
                and not r["de"] and r["cjk"] <= 0.05]
     for r in sorted(gluebad, key=lambda x: -x["glue"])[:12]:
-        print(f"   RED {r['glue']:6.2f} permille  {r['f']}")
+        print(f"   RED {r['glue']:6.2f} permille  {r['f']}"
+              + (f"  ({r['glue_x']} registered real words already excluded)" if r["glue_x"] else ""))
+    nx = sum(r["glue_x"] for r in rows)
+    print(f"   registered real words (GLUE_REAL_WORDS, {len(GLUE_REAL_WORDS)} entries): "
+          f"{nx} tokens excluded in {sum(1 for r in rows if r['glue_x'])} files")
     print(f"   {'OK: no glued files' if not gluebad else f'FAIL: {len(gluebad)} files >= 3 permille (sentences glued into single tokens - invisible to gate 5; run unglue_words.py)'}")
     fails += len(gluebad)
 

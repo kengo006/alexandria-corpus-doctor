@@ -2,13 +2,13 @@
 
 These tools were not designed; they were *survived into*. Across two
 remediation campaigns on a corpus of a few hundred scholarly texts, every
-naive version failed in an instructive way. The twenty failures below are
+naive version failed in an instructive way. The twenty-two failures below are
 preserved in the tools as guards, tests and comments; this file is the
 narrative index. Names of specific
 books and files are omitted throughout — the shapes of the failures are what
 generalize.
 
-## The twenty
+## The twenty-two
 
 **1. Single-letter rate as the primary damage metric.**
 It flagged interview transcripts and bibliographies (initials like "M.F." and
@@ -200,6 +200,40 @@ precisely the method whose wrong answers come out as real words (lesson 15).
 extraction of the same page; where the source has a dash and the fused form
 occurs exactly once, the repair is determined rather than guessed. ⚠ Only the
 determined ones. The rest stay with the dictionary path and its deny list.
+
+**21. A judged false alarm that nobody recorded stays red.**
+Gate 6 counts tokens of 18 letters or more. One book leaned on two long
+technical terms — `transindividuation` twenty-nine times, `postphenomenological`
+three — and sat at 3.12 per mille, just over the floor: red on every run.
+Someone read it and called it a false alarm; nothing recorded the call, so the
+next run was red again, and a gate that stays red for a known reason trains its
+readers to skip the red. *Fix:* a registry of words you have read and judged
+real, each with its reason (`GLUE_REAL_WORDS` in `corpus_health.py`). Register
+the **word**, never the file: exempting the file would also hide the day it
+really does glue, and every other long token in it still counts. The
+exclusions are counted and printed, so the gate says what it no longer looks at.
+
+**22. A defect common enough that the corpus's own dictionary knows it.**
+Some PDFs map the `fi` and `fl` ligatures to a bare `f` in their text layer:
+`infuence`, `frst`, `feld`. A repair that decides wordhood from the corpus — a
+token found in fewer than three files is not a word — handles the book where
+this happens once. It does not handle the defect when several books share it:
+the broken form clears the threshold and is waved through as a word, and a dry
+run that reports zero looks exactly like a finished job. Lesson 6 seen from the
+other side: there, fragments polluted the dictionary; here, the dictionary is
+clean and the defect itself is common. *Fix:* check against an oracle the
+corpus did not build — an external English dictionary. It is noisy the other
+way: over the whole corpus it flagged 1,024 occurrences of 154 types in 218
+files, and reading each type in context left 111 occurrences of 52 types in 12
+files. The rest were names, abbreviations, foreign and archaic words, titles
+and headings, page-boundary duplicates, and other kinds of damage. So the
+repair runs **type by type, bound to the files where it was read** — never as a
+corpus-wide rule — behind five gates: the count applied per type equals the
+count read; line counts unchanged; only matched lines touched; a multiset check
+on the lines; a second run changes nothing. Afterwards the census fell from
+1,024 to 913, exactly the 111. And as lesson 15 warns, some wrong outputs here
+are real words too (`fled` for *filed*, `foods` for *floods*): those are bound
+to their sentence, not repaired by pattern.
 
 ## The three laws they add up to
 

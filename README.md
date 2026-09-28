@@ -132,7 +132,11 @@ single-letter thresholds per language) were calibrated on one ~530-text
 Western-language humanities corpus (reference distribution: splitpair median
 0.20‰, P95 2.91‰). Run the health check once, *read your own distribution*,
 and only then decide what to trust. Gate 1 (phrase density) is
-median-relative and adapts to your corpus automatically.
+median-relative and adapts to your corpus automatically. When gate 6 flags a
+file whose long tokens you have read and found to be real words (a field's
+technical terms), record each **word** with its reason in `GLUE_REAL_WORDS` at
+the top of `corpus_health.py` — not the file. The gate then excludes those
+tokens and prints how many it excluded (LESSONS #21).
 
 ## Scope, honestly
 
@@ -148,7 +152,7 @@ median-relative and adapts to your corpus automatically.
 
 ## The battle log
 
-[LESSONS.md](LESSONS.md) documents the twenty mistakes that shaped these
+[LESSONS.md](LESSONS.md) documents the twenty-two mistakes that shaped these
 tools — circular dictionary contamination (the defect writes itself into the
 lexicon used to detect it), the `re.sub` adjacent-pair bug, why "must halve
 the metric" is mathematically impossible for mid-band files, and the general

@@ -4,6 +4,31 @@ Versioning note: this project starts at v0.1, matching the convention of its
 sibling repos — early versions that work but have not yet survived outside
 their home corpus.
 
+## v0.4 — 2026-09-28
+
+Two lessons from the home corpus, and the gate change the first of them asked for.
+
+- **`corpus_health.py` gate 6 gains a registry of real words** (`GLUE_REAL_WORDS`,
+  word → reason, empty by default). Long tokens you have read and judged to be
+  real words — a field's technical terms — are excluded from the glue rate;
+  every other long token in the same file still counts, and the output prints
+  how many were excluded, in how many files. It registers words, never files:
+  exempting a file would also hide the day it really does glue. (LESSONS #21: a
+  false alarm that had been judged but not recorded kept one book red on every
+  run.)
+- **LESSONS #22: a defect common enough that the corpus's own dictionary knows
+  it.** A repair that decides wordhood from the corpus waves through a broken
+  form that several books share; the fix is an oracle the corpus did not build,
+  read type by type. From one run: 1,024 occurrences flagged, 111 repaired, and
+  the census down by exactly 111.
+- LESSONS and README now say twenty-two.
+
+Checked on three synthetic cases before release: with the registry empty the
+file stays red; registering the word clears it and reports 30 exclusions;
+registering the word while the file also carries an unregistered long token
+leaves it red. The Quickstart's gate 6 result is unchanged (6.39 per mille).
+This release changes a gate's behaviour, so it gets a release tag.
+
 ## v0.3.2 — 2026-09-24
 
 A clean-environment run of the README (fresh clone, empty virtualenv, Python
