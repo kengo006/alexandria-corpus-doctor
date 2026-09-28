@@ -3,6 +3,12 @@
 **Diagnose and repair the text layer of a PDF-derived corpus — because your grep can lie.**
 Companion tooling for [alexandria](https://github.com/kengo006/alexandria), a role-based protocol for running a personal research library with AI agents.
 
+<!-- zh-intro -->
+
+[中文簡介](#中文簡介)
+
+<!-- /zh-intro -->
+
 A text file extracted from a PDF can look complete and still be unsearchable:
 words split apart by kerning (`polit ical`), sentences glued into single tokens
 (`Researchisneededto`), accents systematically misread (`Collège` → `Collége`),
@@ -16,6 +22,19 @@ This repo is the toolkit that came out of debugging exactly that, across a real
 corpus of ~530 scholarly texts: an intake probe, a six-gate health check, and
 statistical repair tools that fix the text using the corpus's own word
 frequencies.
+
+<!-- zh-intro -->
+
+## 中文簡介
+
+**診斷並修復由 PDF 抽出的語料文字層，因為你的 grep 可能會說謊。**
+這是 [alexandria](https://github.com/kengo006/alexandria) 的配套工具；alexandria 是一套以角色分工、讓 AI 代理協助經營個人研究圖書館的協定。
+
+從 PDF 抽出的文字檔，可能看起來完整，卻搜不到東西：字距（kerning）把單字拆開（`polit ical`），整句黏成單一詞元（`Researchisneededto`），重音被系統性地誤讀（`Collège` → `Collége`），頁面因為抽取後沒有留下任何錨點而無法引用。沒有任何東西當掉，搜尋只是什麼也沒找到，而「找不到」就悄悄變成了「原文沒有這樣說」。凡是在乎代理*否定性*主張的工作流程（引文核對、文獻回顧、RAG），這都是傷害最大的失敗模式，因為沒有人會懷疑文字層。
+
+這個 repo 收錄的，是為了除錯這個問題而做出的工具，在約 530 份學術文本的真實語料上一路修出來：一支入庫探針、一套六道閘的健康檢查，以及利用語料本身的詞頻來修復文字的統計修復工具。
+
+<!-- /zh-intro -->
 
 ## How this differs from better parsers
 
