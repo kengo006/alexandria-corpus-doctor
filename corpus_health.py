@@ -65,6 +65,7 @@ PAGEMARK = re.compile(r"={3,}\s*(?:page|omnibus\s*p\.?)\s*\d+", re.I)
 GLUE_REAL_WORDS = {
     # "transindividuation": "a philosophical term; read in context, not two words glued",
 }
+_GLUE_REAL = {k.lower() for k in GLUE_REAL_WORDS}   # tokens are compared lowercased, so a key with capitals still matches
 
 
 def walk_txt(root):
@@ -97,7 +98,7 @@ def scan_txt(root, freq=None):
         # adjacent word pair to join, so its splitpair figure looks PERFECT.
         # 12 OCR-disaster files once sailed through three metrics this way.
         longs = [w for w in toks if len(w) >= 18]
-        glue_x = sum(1 for w in longs if w.lower() in GLUE_REAL_WORDS)
+        glue_x = sum(1 for w in longs if w.lower() in _GLUE_REAL)
         glue = ((len(longs) - glue_x) / len(toks) * 1000) if len(toks) >= 300 else None
         sp = None
         if freq is not None and len(toks) >= 1500:
