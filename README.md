@@ -118,8 +118,10 @@ anywhere; the repair criterion earns its statistical footing on a real corpus.
 Step 3 rewrites the two damaged demo files in place and leaves a `_backup/`
 folder where you ran it. To run the Quickstart again, restore the damaged files
 with `python examples/make_synthetic.py` (fixed seed, byte-identical output);
-`_backup/` can be deleted. On your own corpus, add `_backup/` to that folder's
-`.gitignore` if it is under version control.
+`_backup/` can be deleted. On your own corpus, the repair tools write `_backup/`
+in the directory you run them from (or wherever `--backup` points), holding the
+original of every file they rewrote; if that directory is under version
+control, add `_backup/` to its `.gitignore`.
 
 ## Your own corpus
 

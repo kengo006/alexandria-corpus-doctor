@@ -11,7 +11,7 @@ README only, from a clean-environment install that followed it word for word. Th
 - **Your own corpus**: `export CORPUS_ROOT=/path/...` and POSIX paths are the main example; the Windows `set` line is marked as such.
 - **Python**: 3.11, 3.12 and 3.13 are tested (standard library only); systems that only have `python3` should type that.
 - **The optional PyMuPDF** is not small: version 2.0 brings in onnxruntime, numpy, networkx and its layout packages, about 290 MB in a fresh virtual environment.
-- **`_backup/`**: on your own corpus, add it to that folder's `.gitignore`.
+- **`_backup/`**: the repair tools write it in the directory you run them from (or at `--backup`), holding the originals of the files they rewrote; if that directory is under version control, add `_backup/` to its `.gitignore`.
 
 ## v0.4 — 2026-09-28
 
