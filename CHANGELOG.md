@@ -4,6 +4,25 @@ Versioning note: this project starts at v0.1, matching the convention of its
 sibling repos — early versions that work but have not yet survived outside
 their home corpus.
 
+## v0.5 — 2026-11-02
+
+Three tools that compare one reading of a text with another, from the home corpus. alexandria v4.3 asks for
+the comparisons (a control group has to read something different); these are the tools.
+
+- **`extract_disagree.py`** compares your text layer with the PDF read directly, word by word, page by page.
+  Where two independent paths agree they are very unlikely to be wrong the same way, so the disagreements are
+  the defects, including real-word damage (`modem` for `modern`) that every non-word gate misses. A join that
+  is "equal once glued" is classified (glued / split / correct hyphenation) by the corpus's own word
+  frequencies, built at run time from `--corpus`. Upstream, against 63 articles with a full human read on
+  record, it found 83% of the defects marked "fix"; most misses are in its declared blind spots.
+- **`align_two_witnesses.py`** aligns two independent witnesses (two editions, two scans) and lists the
+  divergences. A divergence is not a defect: either OCR may be wrong, or the editions may really differ. It
+  writes nothing.
+- **`scan_layer_vs_ocr.py`** compares a scan's own OCR layer with a fresh tesseract OCR on five pages, and says
+  whether to switch to re-OCR (lower by >= 1 point and >= 15%). Calibrated on two scans, one each way.
+- Each takes `--self-test`; the scan comparison's builds a synthetic scan with a wrong invisible layer.
+- New tools change what the repository does, so this release gets a tag.
+
 ## v0.4.1 — 2026-11-02
 
 README only, from a clean-environment install that followed it word for word. The tools are unchanged.

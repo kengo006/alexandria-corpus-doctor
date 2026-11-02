@@ -52,11 +52,12 @@ frequencies to fix the library's own files.** The core criterion is
 "those" is common, but because "t" is not a word, so "t hose" cannot be a legal
 two-word sequence. That is what lets it repair `la rge` and `p eople`, the
 cases where the prefix is itself a common word and every ratio-based rule
-fails. No models, no training, no API calls; plain Python, and the only
-optional dependency is PyMuPDF, used only by `pdf_risk_probe.py`,
-`fix_pipeline.py` and the `--pdf` gate of `corpus_health.py` (`pip install
-pymupdf`, or prefix the command with `uv run --with pymupdf`). Nothing in the
-Quickstart needs it. It is not small: PyMuPDF 2.0 brings in onnxruntime, numpy,
+fails. No models, no training, no API calls; plain Python. PyMuPDF is optional,
+used by `pdf_risk_probe.py`, `fix_pipeline.py`, `extract_disagree.py`,
+`scan_layer_vs_ocr.py` and the `--pdf` gate of `corpus_health.py` (`pip install
+pymupdf`, or prefix the command with `uv run --with pymupdf`);
+`scan_layer_vs_ocr.py` also needs `pyspellchecker` and the `tesseract` binary.
+Nothing in the Quickstart needs any of them. It is not small: PyMuPDF 2.0 brings in onnxruntime, numpy,
 networkx and its own layout packages, about 290 MB in a fresh virtual
 environment.
 
@@ -77,6 +78,9 @@ only. The commands below say `python`; on systems that only have `python3`
 | `tokenwalk.py` | the **single implementation** of adjacent-token joining — and a runnable counter-example (`join_pairs_resub_BROKEN`) showing what `re.sub` does instead |
 | `ligature_and_encoding.py` | ligature expansion, line-end dehyphenation, and font-encoding garble detection — **adapted from four upstream parsers** (docling, Kreuzberg, marker, RAGFlow) with attribution and re-measured thresholds — see [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) |
 | `add_page_markers.py` | recover printed page anchors from running heads swept into OCR text (LIS outlier removal, four gates, no fuzzy alignment) |
+| `extract_disagree.py` | **two extraction paths, word by word**: your text layer against the PDF read directly; where they disagree is where the defects are, including damage that leaves real words (`modem` for `modern`) |
+| `align_two_witnesses.py` | **two independent witnesses** of the same text (two editions, two scans): lists every divergence for a human to settle on the page image; writes nothing |
+| `scan_layer_vs_ocr.py` | for a scan that ships its own OCR layer: is that layer worse than a fresh OCR of the page images? five pages decide the extraction route |
 
 All repair tools are dry-run by default, back up before writing, and follow one
 discipline: **when unsure, do nothing.** A false repair is worse than a missed
