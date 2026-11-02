@@ -56,7 +56,13 @@ fails. No models, no training, no API calls; plain Python, and the only
 optional dependency is PyMuPDF, used only by `pdf_risk_probe.py`,
 `fix_pipeline.py` and the `--pdf` gate of `corpus_health.py` (`pip install
 pymupdf`, or prefix the command with `uv run --with pymupdf`). Nothing in the
-Quickstart needs it.
+Quickstart needs it. It is not small: PyMuPDF 2.0 brings in onnxruntime, numpy,
+networkx and its own layout packages, about 290 MB in a fresh virtual
+environment.
+
+**Python**: 3.11, 3.12 and 3.13 are tested; the tools use the standard library
+only. The commands below say `python`; on systems that only have `python3`
+(stock Ubuntu, for one), type `python3` instead.
 
 ## The tools
 
@@ -112,7 +118,8 @@ anywhere; the repair criterion earns its statistical footing on a real corpus.
 Step 3 rewrites the two damaged demo files in place and leaves a `_backup/`
 folder where you ran it. To run the Quickstart again, restore the damaged files
 with `python examples/make_synthetic.py` (fixed seed, byte-identical output);
-`_backup/` can be deleted.
+`_backup/` can be deleted. On your own corpus, add `_backup/` to that folder's
+`.gitignore` if it is under version control.
 
 ## Your own corpus
 
@@ -121,10 +128,11 @@ text-layer convention alexandria uses; page boundaries as `\f` or
 `===== page N =====`). Files and directories starting with `_` are ignored.
 
 ```bash
-set CORPUS_ROOT=C:\path\to\your\text-layer    # or export, or pass --corpus
+export CORPUS_ROOT=/path/to/your/text-layer   # or pass --corpus
+# Windows cmd: set CORPUS_ROOT=C:\path\to\your\text-layer
 
-python corpus_health.py --pdf C:\path\to\your\pdfs     # full check incl. gate 3
-python fix_pipeline.py  --pdf C:\path\to\your\pdfs     # ladder over flagged files
+python corpus_health.py --pdf /path/to/your/pdfs      # full check incl. gate 3
+python fix_pipeline.py  --pdf /path/to/your/pdfs      # ladder over flagged files
 ```
 
 **Calibration discipline:** the absolute floors (splitpair ≥ 5‰, glue ≥ 3‰,
