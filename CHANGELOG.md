@@ -4,6 +4,23 @@ Versioning note: this project starts at v0.1, matching the convention of its
 sibling repos — early versions that work but have not yet survived outside
 their home corpus.
 
+## v0.5.1 — 2026-11-04
+
+A clean-environment install of v0.5, run by following the README word for word, found two things in
+`scan_layer_vs_ocr.py`; checking them found a third.
+
+- **It now names every missing requirement in one run.** It needs PyMuPDF, pyspellchecker and the tesseract
+  binary, and it looked for them one at a time: without PyMuPDF, the run stopped with Python's
+  `ModuleNotFoundError` traceback instead of its own "cannot run" (exit 3), and you learned that pyspellchecker
+  and tesseract were missing only after installing PyMuPDF. It now checks all three first and, if any is
+  missing, prints them all with how to get each, and exits 3.
+- **The self-test's skip lines name what is missing and count what was skipped.** One read
+  `skip  end to end (No module named 'pymupdf' not available)`; they now read
+  `skip  end to end, 1 check (not installed: PyMuPDF, pyspellchecker, tesseract)`, and the summary ends
+  `4 of 4 as expected, 3 skipped`.
+- The README says the 290 MB for PyMuPDF was measured with pip; with uv it is about 244 MB.
+- The tool's behaviour when a requirement is missing changed, so this release gets a tag.
+
 ## v0.5 — 2026-11-02
 
 Three tools that compare one reading of a text with another, from the home corpus. alexandria v4.3 asks for

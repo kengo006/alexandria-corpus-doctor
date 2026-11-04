@@ -29,7 +29,8 @@ Usage:
 Without --pages: the pages at 15/30/50/70/90% of the file (away from the cover and the index).
 Read-only: renders and OCR output live in a temporary folder.
 Needs: PyMuPDF, pyspellchecker, and the tesseract binary (on PATH, or --tesseract / $TESSERACT).
-Exit codes: 0 = decided / 2 = too few words to decide / 3 = cannot run (no tesseract, OCR failed)
+Exit codes: 0 = decided / 2 = too few words to decide / 3 = cannot run (a requirement missing, all of them
+named at once; OCR failed)
 """
 import argparse
 import os
@@ -82,13 +83,32 @@ def find_tesseract(arg):
     return None
 
 
+def missing_deps(tess=None):
+    """Every missing requirement at once, as (name, how to get it). Checked one at a time, a missing PyMuPDF hid a
+    missing tesseract until PyMuPDF was installed."""
+    out = []
+    try:
+        import pymupdf  # noqa: F401
+    except ImportError:
+        out.append(("PyMuPDF", "pip install pymupdf"))
+    try:
+        import spellchecker  # noqa: F401
+    except ImportError:
+        out.append(("pyspellchecker", "pip install pyspellchecker"))
+    if not find_tesseract(tess):
+        out.append(("tesseract", "on PATH, or --tesseract / $TESSERACT"))
+    return out
+
+
 def compare(pdf, pages=None, lang="eng", tess=None, tessdata=None, show=False):
+    missing = missing_deps(tess)
+    if missing:
+        print("⛔ cannot run, missing: " + "; ".join(f"{n} ({how})" for n, how in missing)
+              + ". Not checked is not passed.")
+        return 3, None
     import pymupdf
     stats = make_stats()
     tess = find_tesseract(tess)
-    if not tess:
-        print("⛔ tesseract not found (PATH, --tesseract or $TESSERACT): not checked is not passed")
-        return 3, None
     doc = pymupdf.open(pdf)
     n = doc.page_count
     pages = pages or sorted({max(1, min(n, round(n * f))) for f in (0.15, 0.30, 0.50, 0.70, 0.90)})
@@ -133,19 +153,21 @@ def _self_test():
         ("lower by 1 point but only 10% relative => keep", decide((1000, 100), (1000, 90))[0] == "keep"),
         ("too few words => no verdict", decide((150, 9), (900, 3))[0] == "too few"),
     ]
-    try:
+    missing = [n for n, _ in missing_deps()]
+    skipped = []
+    if "pyspellchecker" in missing:
+        skipped.append(("stats", 2, ["pyspellchecker"]))
+    else:
         stats = make_stats()
         w, b = stats("The represen-\ntation of the politicians was atten tion to the modern world.")
         checks.append(("split-word halves are not counted as misreadings", b == 0))
         w, b = stats("The pohticians and the modem world.")
         checks.append(("li->h and rn->m are non-words", b == 1))     # 'modem' is a real word: the known blind spot
-    except ImportError:
-        print("skip  stats (pyspellchecker not installed)")
-    try:
+    if missing:
+        skipped.append(("end to end", 1, missing))                   # it needs all three
+    else:
         import pymupdf
         tess = find_tesseract(None)
-        if not tess:
-            raise ImportError("tesseract")
         good = ("The politicians of the modern state claimed that public life would follow the will of the people. "
                 "Critics replied that the public was itself produced by the institutions that claimed to represent it. ") * 6
         bad = good.replace("li", "h").replace("rn", "m")
@@ -164,13 +186,14 @@ def _self_test():
             code, verdict = compare(tmp / "scan.pdf", pages=[1, 2], tess=tess)
         checks.append(("scan with a bad OCR layer => switch (end to end, tesseract)", code == 0 and verdict == "switch"))
         shutil.rmtree(tmp, ignore_errors=True)
-    except ImportError as e:
-        print(f"skip  end to end ({e} not available)")
     bad_n = 0
     for name, ok in checks:
         bad_n += not ok
         print(("ok   " if ok else "FAIL ") + name)
-    print(f"{len(checks) - bad_n} of {len(checks)} as expected")
+    for name, n, why in skipped:
+        print(f"skip  {name}, {n} check{'s' if n > 1 else ''} (not installed: {', '.join(why)})")
+    n_skip = sum(n for _, n, _ in skipped)
+    print(f"{len(checks) - bad_n} of {len(checks)} as expected" + (f", {n_skip} skipped" if n_skip else ""))
     return 1 if bad_n else 0
 
 

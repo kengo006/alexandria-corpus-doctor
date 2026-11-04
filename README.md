@@ -59,7 +59,8 @@ pymupdf`, or prefix the command with `uv run --with pymupdf`);
 `scan_layer_vs_ocr.py` also needs `pyspellchecker` and the `tesseract` binary.
 Nothing in the Quickstart needs any of them. It is not small: PyMuPDF 2.0 brings in onnxruntime, numpy,
 networkx and its own layout packages, about 290 MB in a fresh virtual
-environment.
+environment with pip (about 244 MB with uv, which does not compile `.pyc` files
+by default). `scan_layer_vs_ocr.py` names every missing requirement in one run.
 
 **Python**: 3.11, 3.12 and 3.13 are tested; the tools use the standard library
 only. The commands below say `python`; on systems that only have `python3`
