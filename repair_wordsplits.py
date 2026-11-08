@@ -40,6 +40,12 @@ import os
 import re
 import shutil
 from collections import Counter
+import sys
+# Redirected to a file or a pipe, Python on Windows writes in the code page (cp1252, cp950), which cannot print
+# the marks below or an accented file name, and the run dies with UnicodeEncodeError. Write UTF-8 instead.
+for _stream in (sys.stdout, sys.stderr):
+    if hasattr(_stream, "reconfigure"):
+        _stream.reconfigure(encoding="utf-8")
 
 # DO NOT scan adjacent pairs with re.sub. re.sub consumes matches left to
 # right: in `Michel Fou cault` it first matches "Michel Fou" (no merge) and

@@ -393,13 +393,16 @@ def _self_test() -> int:
         checks.append(("end to end: a whole line's spaces lost is found", any("theexamplesaboveillustrate" == " ".join(e[1]).lower() for e in r3["a_glue"])))
         checks.append(("end to end: real-word damage 'modem'/'dearly' is reported", len(r3["a_bad"]) + len(r3["both"]) >= 2))
         shutil.rmtree(tmp, ignore_errors=True)
+        skipped = 0
     except ImportError:
-        print("skip  end to end (PyMuPDF not installed)")
+        skipped = 2
     bad = 0
     for name, ok in checks:
         bad += not ok
         print(("ok   " if ok else "FAIL ") + name)
-    print(f"{len(checks) - bad} of {len(checks)} as expected")
+    if skipped:
+        print(f"skip  end to end, {skipped} checks (not installed: PyMuPDF)")
+    print(f"{len(checks) - bad} of {len(checks)} as expected" + (f", {skipped} skipped" if skipped else ""))
     return 1 if bad else 0
 
 

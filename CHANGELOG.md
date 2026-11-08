@@ -4,6 +4,21 @@ Versioning note: this project starts at v0.1, matching the convention of its
 sibling repos — early versions that work but have not yet survived outside
 their home corpus.
 
+## v0.5.2 — 2026-11-05
+
+On Windows, when a tool's output goes to a file or a pipe, Python writes in the system code page (cp1252,
+cp950). Ten tools did not set their output encoding, and some of what they print is not in those code pages: a
+warning mark, or a file name with an accent (`Rancière` cannot be written in cp950). Measured with the output
+redirected, `scan_layer_vs_ocr.py`'s missing-requirement message stopped with `UnicodeEncodeError` under both code
+pages, and `corpus_health.py` and `repair_wordsplits.py` did under cp950 on a damaged file with an accented name.
+
+- **All tools now write UTF-8** to stdout and stderr; `extract_disagree.py` and `align_two_witnesses.py` already
+  did. `tokenwalk.py` and `ligature_and_encoding.py` set it only when run directly: they are also imported for
+  their functions, and importing them leaves the caller's output as it was.
+- `extract_disagree.py`'s self-test counts what it skipped, as `scan_layer_vs_ocr.py` does:
+  `7 of 7 as expected, 2 skipped`.
+- What the tools write changed, so this release gets a tag.
+
 ## v0.5.1 — 2026-11-04
 
 A clean-environment install of v0.5, run by following the README word for word, found two things in

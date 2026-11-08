@@ -39,6 +39,11 @@ import re
 import shutil
 import sys
 from collections import Counter
+# Redirected to a file or a pipe, Python on Windows writes in the code page (cp1252, cp950), which cannot print
+# the marks below or an accented file name, and the run dies with UnicodeEncodeError. Write UTF-8 instead.
+for _stream in (sys.stdout, sys.stderr):
+    if hasattr(_stream, "reconfigure"):
+        _stream.reconfigure(encoding="utf-8")
 
 
 def _fitz():

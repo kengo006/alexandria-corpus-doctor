@@ -46,6 +46,7 @@ USAGE
     new_text = join_pairs_fixpoint(text, accept)   # accept(a, b) -> bool
 """
 import re
+import sys
 
 TOKEN = re.compile(r"[A-Za-z]+")
 
@@ -122,6 +123,12 @@ def join_pairs_resub_BROKEN(text, accept, sep=" "):
 
 
 if __name__ == "__main__":
+    # Set here, not at import: this module is also imported for its functions, and an import must not change
+    # its caller's output. Run directly with output redirected on Windows, Python writes in the code page
+    # (cp1252, cp950) and dies with UnicodeEncodeError on a mark or an accented file name; write UTF-8 instead.
+    for _stream in (sys.stdout, sys.stderr):
+        if hasattr(_stream, "reconfigure"):
+            _stream.reconfigure(encoding="utf-8")
     demo = "the polit ical theory of insti tution al design"
     # "institution" must be acceptable for the chain to reach "institutional":
     # that is the point of the fixed point, not an oversight.

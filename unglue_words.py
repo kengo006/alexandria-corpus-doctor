@@ -42,6 +42,12 @@ import os
 import re
 import shutil
 from collections import Counter
+import sys
+# Redirected to a file or a pipe, Python on Windows writes in the code page (cp1252, cp950), which cannot print
+# the marks below or an accented file name, and the run dies with UnicodeEncodeError. Write UTF-8 instead.
+for _stream in (sys.stdout, sys.stderr):
+    if hasattr(_stream, "reconfigure"):
+        _stream.reconfigure(encoding="utf-8")
 
 MIN_LEN = 15            # only tokens this long are candidates (short = too ambiguous)
 GLUE_THR = 3.0          # file-level floor: long tokens per 1k

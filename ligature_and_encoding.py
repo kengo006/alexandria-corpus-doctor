@@ -229,6 +229,12 @@ def scan_corpus(root, flag_permille=GARBLE_FLAG_PERMILLE):
 
 
 if __name__ == "__main__":
+    # Set here, not at import: this module is also imported for its functions, and an import must not change
+    # its caller's output. Run directly with output redirected on Windows, Python writes in the code page
+    # (cp1252, cp950) and dies with UnicodeEncodeError on a mark or an accented file name; write UTF-8 instead.
+    for _stream in (sys.stdout, sys.stderr):
+        if hasattr(_stream, "reconfigure"):
+            _stream.reconfigure(encoding="utf-8")
     if len(sys.argv) < 2:
         print(__doc__.strip().splitlines()[0])
         print("\nusage: python ligature_and_encoding.py <corpus-dir> [--calibrate]")
